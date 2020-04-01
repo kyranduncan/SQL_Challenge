@@ -68,3 +68,17 @@ REFERENCES employees (emp_no);
 ALTER TABLE titles ADD CONSTRAINT fk_titles_emp_no FOREIGN KEY(emp_no)
 REFERENCES employees (emp_no);
 
+CREATE VIEW employee_info AS
+SELECT employees.emp_no, employees.last_name, employees.first_name, employees.gender, salaries.salary
+FROM employees
+INNER JOIN salaries ON
+employees.emp_no = salaries.emp_no;
+
+CREATE VIEW eightysix_emp AS
+SELECT emp_no, last_name, first_name, hire_date
+FROM employees
+WHERE hire_date >= '1/01/1986'::date
+AND hire_date <= '12/31/1986'::date
+
+SELECT *
+FROM eightysix_emp;
